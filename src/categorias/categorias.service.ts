@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
+import { Categoria } from './entities/categoria.entity';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
 @Injectable()
 export class CategoriasService {
-  create(createCategoriaDto: CreateCategoriaDto) {
-    return 'This action adds a new categoria';
+  create(dados: CreateCategoriaDto): Promise<Categoria> {
+    const categoria = Categoria.create({ ...dados });
+    return categoria.save();
   }
 
-  findAll() {
-    return `This action returns all categorias`;
+  findAll(): Promise<Categoria[]> {
+    return Categoria.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} categoria`;
+  findOne(id: number): Promise<Categoria | null> {
+    return Categoria.findOne({ where: { id } });
   }
 
-  update(id: number, updateCategoriaDto: UpdateCategoriaDto) {
-    return `This action updates a #${id} categoria`;
+  async update(
+    id: number,
+    dados: UpdateCategoriaDto,
+  ): Promise<Categoria | null> {
+    const categoria = await this.findOne(id);
+    if (!categoria) return null;
+
+    Object.assign(categoria, { ...dados });
+    return categoria.save();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} categoria`;
+  async remove(id: number): Promise<boolean> {
+    const categoria = await this.findOne(id);
+    if (!categoria) return false;
+
+    await categoria.remove();
+    return true;
   }
 }
