@@ -1,0 +1,39 @@
+
+<h1 class="mt-5">Consulta de Movimentações</h1>
+
+<a href="/movimentacoes/novo" class="btn btn-primary mt-3">
+    Nova Movimentação
+</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Conta</th>
+            <th>Categoria</th>
+            <th class="text-right">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaMovimentacoes.forEach(function(movimentacao, index) { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= movimentacao.valor %></td>
+                <td><%= movimentacao.data_movimentacao %></td>
+                <td><%= movimentacao.descricao %></td>
+                <td><%= movimentacao.id_conta_fk %></td>
+                <td><%= movimentacao.id_categoria_fk %></td>
+                <td>
+                    <a href="/movimentacoes/<%= movimentacao.id %>/atualizacao"
+                       class="btn btn-sm btn-secondary">Atualizar</a>
+
+                    <a href="/movimentacoes/<%= movimentacao.id %>/exclusao"
+                       class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

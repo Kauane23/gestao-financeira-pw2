@@ -1,0 +1,34 @@
+
+<h3 class="mt-5">Exclusão de Movimentação</h3>
+
+<div class="alert alert-warning mt-3">
+    Deseja realmente excluir a movimentação abaixo?
+    Esta ação não pode ser desfeita.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Valor</dt>
+    <dd class="col-sm-9"><%= movimentacao.valor %></dd>
+
+    <dt class="col-sm-3">Data</dt>
+    <dd class="col-sm-9"><%= movimentacao.data_movimentacao %></dd>
+
+    <dt class="col-sm-3">Descrição</dt>
+    <dd class="col-sm-9"><%= movimentacao.descricao %></dd>
+
+    <dt class="col-sm-3">Conta</dt>
+    <dd class="col-sm-9"><%= movimentacao.id_conta_fk %></dd>
+
+    <dt class="col-sm-3">Categoria</dt>
+    <dd class="col-sm-9"><%= movimentacao.id_categoria_fk %></dd>
+</dl>
+
+<form action="/movimentacoes/<%= movimentacao.id %>/exclusao" method="post">
+    <button type="submit" class="btn btn-danger">
+        Confirmar exclusão
+    </button>
+
+    <a href="/movimentacoes" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>
