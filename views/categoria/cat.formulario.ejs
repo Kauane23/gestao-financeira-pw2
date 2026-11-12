@@ -1,0 +1,31 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const categoria = locals.categoria || {}; %>
+
+<h2 class="h4 mb-3"><%= categoria.id ? 'Editar categoria' : 'Nova categoria' %></h2>
+
+<form action="<%= categoria.id ? `/categorias/${categoria.id}/atualizacao` : '/categorias/novo' %>" method="post">
+  <div class="mb-3">
+    <label for="nome" class="form-label">Nome</label>
+    <input
+      type="text"
+      class="form-control"
+      name="nome"
+      id="nome"
+      placeholder="Ex.: Alimentação"
+      value="<%= categoria.nome || '' %>"
+    />
+
+    <% if (erros.has('nome')) { %>
+      <div class="invalid-feedback d-block">
+        <ul>
+          <% erros.get('nome').forEach((mensagem) => { %>
+            <li><small><%= mensagem %></small></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+  </div>
+
+  <button type="submit" class="btn btn-primary me-2">Salvar</button>
+  <a href="/categorias" class="btn btn-secondary">Cancelar</a>
+</form>

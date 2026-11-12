@@ -1,4 +1,4 @@
-
+/*
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateMovimentacoesDto {
@@ -17,3 +17,4 @@ export class CreateMovimentacoesDto {
     @IsNotEmpty({ message: 'O campo categoria é obrigatório' })
     id_categoria_fk!: number;
 }
+*/

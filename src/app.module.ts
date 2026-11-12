@@ -6,8 +6,7 @@ import { DatabaseModule } from './config/database/database.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ContasModule } from './contas/contas.module';
 import { CategoriasModule } from './categorias/categorias.module';
-import { TransacoesModule } from './transacoes/transacoes.module';
-import { ResumoModule } from './resumo/resumo.module';
+import { MovimentacoesModule } from './movimentacoes/movimentacoes.module';
 
 @Module({
   imports: [
@@ -16,8 +15,7 @@ import { ResumoModule } from './resumo/resumo.module';
     UsuariosModule,
     ContasModule,
     CategoriasModule,
-    TransacoesModule,
-    ResumoModule,
+    MovimentacoesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

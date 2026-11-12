@@ -1,46 +1,46 @@
 
-import { Injectable } from '@nestjs/common';
-import { Movimentacoes } from './movimentacoes.entity';
-import { CreateMovimentacoesDto } from './dto/create-movimentacoes.dto';
+// import { Injectable } from '@nestjs/common';
+// import { Movimentacoes } from './movimentacoes.entity';
+// import { CreateMovimentacoesDto } from './dto/create-movimentacoes.dto';
 
-@Injectable()
-export class MovimentacoesService {
+// @Injectable()
+// export class MovimentacoesService {
 
-    async findAll(): Promise<Movimentacoes[]> {
-        let movimentacoes = await Movimentacoes.find();
+//     async findAll(): Promise<Movimentacoes[]> {
+//         let movimentacoes = await Movimentacoes.find();
 
-        return movimentacoes;
-    }
+//         return movimentacoes;
+//     }
 
-    async findOne(_id: number): Promise<Movimentacoes | null> {
-        return Movimentacoes.findOne({
-            where: { id: _id }
-        });
-    }
+//     async findOne(_id: number): Promise<Movimentacoes | null> {
+//         return Movimentacoes.findOne({
+//             where: { id: _id }
+//         });
+//     }
 
-    async create(dados: CreateMovimentacoesDto): Promise<Movimentacoes> {
-        const movimentacao = Movimentacoes.create({ ...dados });
+//     async create(dados: CreateMovimentacoesDto): Promise<Movimentacoes> {
+//         const movimentacao = Movimentacoes.create({ ...dados });
 
-        return movimentacao.save();
-    }
+//         return movimentacao.save();
+//     }
 
-    async update(id: number, dados: CreateMovimentacoesDto): Promise<Movimentacoes | null> {
-        const movimentacao = await this.findOne(id);
+//     async update(id: number, dados: CreateMovimentacoesDto): Promise<Movimentacoes | null> {
+//         const movimentacao = await this.findOne(id);
 
-        if (!movimentacao) return null;
+//         if (!movimentacao) return null;
 
-        Object.assign(movimentacao, { ...dados });
+//         Object.assign(movimentacao, { ...dados });
 
-        return movimentacao.save();
-    }
+//         return movimentacao.save();
+//     }
 
-    async remove(id: number): Promise<boolean> {
-        const movimentacao = await this.findOne(id);
+//     async remove(id: number): Promise<boolean> {
+//         const movimentacao = await this.findOne(id);
 
-        if (!movimentacao) return false;
+//         if (!movimentacao) return false;
 
-        await movimentacao.remove();
+//         await movimentacao.remove();
 
-        return true;
-    }
-}
+//         return true;
+//     }
+// }
