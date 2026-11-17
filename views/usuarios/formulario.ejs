@@ -1,0 +1,143 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const usuario = locals.usuario || {}; %>
+
+<h3 class="mt-5">
+    <% if (usuario?.id) { %>
+        Atualização do Usuário
+    <% } else { %>
+        Novo Usuário
+    <% } %>
+
+    - <%= usuario?.nome_completo || '' %>
+</h3>
+
+<form action="<%= usuario?.id ? `/usuarios/${usuario.id}/atualizacao` : '/usuarios/novo' %>" method="post">
+
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar o usuário</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="nome_completo" class="form-label">Nome completo</label>
+        <input
+            type="text"
+            class="form-control"
+            id="nome_completo"
+            name="nome_completo"
+            value="<%= usuario?.nome_completo || '' %>"
+            placeholder="Informe o nome completo"
+            maxlength="200"
+        >
+
+        <% if (erros.has('nome_completo')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('nome_completo').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            value="<%= usuario?.email || '' %>"
+            placeholder="Informe o e-mail"
+            maxlength="200"
+        >
+
+        <% if (erros.has('email')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('email').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input
+            type="text"
+            class="form-control"
+            id="cpf"
+            name="cpf"
+            value="<%= usuario?.cpf || '' %>"
+            placeholder="Informe o CPF"
+            maxlength="50"
+        >
+
+        <% if (erros.has('cpf')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('cpf').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input
+            type="text"
+            class="form-control"
+            id="telefone"
+            name="telefone"
+            value="<%= usuario?.telefone || '' %>"
+            placeholder="Informe o telefone"
+            maxlength="50"
+        >
+
+        <% if (erros.has('telefone')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('telefone').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="senha" class="form-label">
+            <%= usuario?.id ? 'Nova senha' : 'Senha' %>
+        </label>
+        <input
+            type="password"
+            class="form-control"
+            id="senha"
+            name="senha"
+            placeholder="Informe a senha"
+            maxlength="255"
+        >
+
+        <% if (erros.has('senha')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('senha').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <button type="submit" class="btn btn-primary mr-2">
+            Salvar Usuário
+        </button>
+
+        <a href="/usuarios" class="btn btn-warning">
+            Cancelar
+        </a>
+    </div>
+
+</form>

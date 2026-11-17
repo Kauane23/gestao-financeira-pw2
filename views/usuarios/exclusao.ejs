@@ -1,0 +1,44 @@
+<h3 class="mt-5">Exclusão de Usuário</h3>
+
+<p>Deseja realmente excluir este usuário?</p>
+
+<table class="table mt-3">
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <td><%= usuario.id %></td>
+        </tr>
+
+        <tr>
+            <th>Nome completo</th>
+            <td><%= usuario.nome_completo %></td>
+        </tr>
+
+        <tr>
+            <th>E-mail</th>
+            <td><%= usuario.email %></td>
+        </tr>
+
+        <tr>
+            <th>CPF</th>
+            <td><%= usuario.cpf %></td>
+        </tr>
+
+        <tr>
+            <th>Telefone</th>
+            <td><%= usuario.telefone %></td>
+        </tr>
+    </tbody>
+</table>
+
+<form action="/usuarios/<%= usuario.id %>/exclusao" method="post">
+
+    <button type="submit" class="btn btn-danger">
+        Confirmar Exclusão
+    </button>
+
+    <a href="/usuarios" class="btn btn-warning">
+        Cancelar
+    </a>
+
+</form>
