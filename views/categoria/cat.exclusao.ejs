@@ -1,0 +1,10 @@
+<h2 class="h4 mb-3">Excluir categoria</h2>
+
+<div class="alert alert-warning">
+  Deseja realmente excluir a categoria <strong><%= categoria.nome %></strong>?
+</div>
+
+<form action="/categorias/<%= categoria.id %>/exclusao" method="post">
+  <button type="submit" class="btn btn-danger me-2">Sim, excluir</button>
+  <a href="/categorias" class="btn btn-secondary">Cancelar</a>
+</form>
