@@ -1,0 +1,144 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const conta = locals.conta || {}; %>
+
+<h3 class="mt-5">
+    <% if (conta?.id) { %>
+        Atualização da Conta
+    <% } else { %>
+        Nova Conta
+    <% } %>
+
+    - <%= conta?.nome || '' %>
+</h3>
+
+<form action="<%= conta?.id ? `/contas/${conta.id}/atualizacao` : '/contas/novo' %>" method="post"> 
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar a conta</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input
+            type="text"
+            class="form-control"
+            id="nome"
+            name="nome"
+            value="<%= conta?.nome || '' %>"
+            placeholder="Informe o nome da conta"
+            maxlength="100"
+        >
+
+        <% if (erros.has('nome')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('nome').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="nome_instituicao" class="form-label">Instituição</label>
+        <input
+            type="text"
+            class="form-control"
+            id="nome_instituicao"
+            name="nome_instituicao"
+            value="<%= conta?.nome_instituicao || '' %>"
+            placeholder="Informe o nome da instituição"
+            maxlength="150"
+        >
+
+        <% if (erros.has('nome_instituicao')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('nome_instituicao').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="tipo" class="form-label">Tipo</label>
+        <input
+            type="text"
+            class="form-control"
+            id="tipo"
+            name="tipo"
+            value="<%= conta?.tipo || '' %>"
+            placeholder="Informe o tipo da conta"
+            maxlength="100"
+            required
+        >
+
+        <% if (erros.has('tipo')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('tipo').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="saldo_atual" class="form-label">Saldo atual</label>
+        <input
+            type="number"
+            class="form-control"
+            id="saldo_atual"
+            name="saldo_atual"
+            value="<%= conta?.saldo_atual ?? '' %>"
+            placeholder="Informe o saldo atual"
+            step="0.01"
+            required
+        >
+
+        <% if (erros.has('saldo_atual')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('saldo_atual').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="id_usuario_fk" class="form-label">ID do Usuário</label>
+        <input
+            type="number"
+            class="form-control"
+            id="id_usuario_fk"
+            name="id_usuario_fk"
+            value="<%= conta?.id_usuario_fk ?? '' %>"
+            placeholder="Informe o ID do usuário"
+            min="1"
+            step="1"
+            required
+        >
+
+        <% if (erros.has('id_usuario_fk')) { %>
+            <div class="invalid-feedback d-block">
+                <% erros.get('id_usuario_fk').forEach(mensagem => { %>
+                    <small><%= mensagem %></small><br>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="form-group mb-3">
+        <button type="submit" class="btn btn-primary mr-2">
+            Salvar Conta
+        </button>
+
+        <a href="/contas" class="btn btn-warning">
+            Cancelar
+        </a>
+    </div>
+</form>

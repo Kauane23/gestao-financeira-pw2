@@ -1,0 +1,54 @@
+<h1 class="mt-5">Consulta de Contas</h1>
+
+<a href="/contas/novo" class="btn btn-primary mt-3">
+    Nova Conta
+</a>
+
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Instituição</th>
+            <th>Tipo</th>
+            <th>Saldo atual</th>
+            <th>Usuário</th>
+            <th class="text-right">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% listaContas.forEach(function(conta, index) { %>
+            <tr>
+                <td>
+                    <%= index + 1 %>
+                </td>
+                <td>
+                    <%= conta.nome || '' %>
+                        <br>
+                        <b><small>Id: <%= conta.id %></small></b>
+                </td>
+                <td>
+                    <%= conta.nome_instituicao || '' %>
+                </td>
+                <td>
+                    <%= conta.tipo %>
+                </td>
+                <td>R$ <%= Number(conta.saldo_atual).toFixed(2).replace('.', ',' ) %>
+                </td>
+                <td>
+                    <%= conta.id_usuario_fk %>
+                </td>
+                <td>
+                    <a href="/contas/<%= conta.id %>/atualizacao" class="btn btn-sm btn-secondary">
+                        Atualizar
+                    </a>
+
+                    <a href="/contas/<%= conta.id %>/exclusao" class="btn btn-sm btn-danger">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+<h3 class="mt-5">Exclusão de Conta</h3>
+
+<p>Deseja realmente excluir esta conta?</p>
+
+<table class="table mt-3"> 
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <td><%= conta.id %></td>
+        </tr>
+
+        <tr>
+            <th>Nome</th>
+            <td><%= conta.nome || '' %></td>
+        </tr>
+
+        <tr>
+            <th>Instituição</th>
+            <td><%= conta.nome_instituicao || '' %></td>
+        </tr>
+
+        <tr>
+            <th>Tipo</th>
+            <td><%= conta.tipo %></td>
+        </tr>
+
+        <tr>
+            <th>Saldo atual</th>
+            <td>
+                R$ <%= Number(conta.saldo_atual).toFixed(2).replace('.', ',') %>
+            </td>
+        </tr>
+
+        <tr>
+            <th>ID do Usuário</th>
+            <td><%= conta.id_usuario_fk %></td>
+        </tr>
+    </tbody>
+</table>
+
+<form action="/contas/<%= conta.id %>/exclusao" method="post">
+
+    <button type="submit" class="btn btn-danger">
+        Confirmar Exclusão
+    </button>
+
+    <a href="/contas" class="btn btn-warning">
+        Cancelar
+    </a>
+</form>

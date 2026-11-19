@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { Conta } from './entities/conta.entity';
 import { CreateContaDto } from './dto/create-conta.dto';
-import { UpdateContaDto } from './dto/update-conta.dto';
 
 @Injectable()
 export class ContasService {
-  create(createContaDto: CreateContaDto) {
-    return 'This action adds a new conta';
+  async findAll(): Promise<Conta[]> {
+    let contas = await Conta.find();
+    return contas;
   }
 
-  findAll() {
-    return `This action returns all contas`;
+  async findOne(_id: number): Promise<Conta | null> {
+    return Conta.findOne({ where: { id: _id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} conta`;
+  async create(dados: CreateContaDto): Promise<Conta> {
+    const conta = Conta.create({ ...dados });
+    return conta.save();
   }
 
-  update(id: number, updateContaDto: UpdateContaDto) {
-    return `This action updates a #${id} conta`;
+  async update(id: number, dados: CreateContaDto): Promise<Conta | null> {
+    const conta = await this.findOne(id);
+
+    if (!conta) return null;
+
+    Object.assign(conta, { ...dados });
+    return conta.save();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} conta`;
+  async remove(id: number): Promise<boolean> {
+    const conta = await this.findOne(id);
+
+    if (!conta) return false;
+
+    await conta.remove();
+    return true;
   }
 }
